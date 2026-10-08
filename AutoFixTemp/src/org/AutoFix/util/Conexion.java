@@ -55,4 +55,8 @@ public class Conexion {
             LOGGER.log(Level.SEVERE, "Error al cerrar la conexión", e);
         }
     }
+
+    public Connection getConexion() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
