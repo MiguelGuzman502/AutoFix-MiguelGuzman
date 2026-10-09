@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="450.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.AutoFix.controller.TransaccionController">
+   <children>
+      <Label layoutX="150.0" layoutY="20.0" text="Registro de Reparación / Transacción" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+
+      <TextField fx:id="txtIdVehiculo" layoutX="50.0" layoutY="70.0" prefWidth="400.0" promptText="ID Vehículo" />
+      <TextField fx:id="txtIdMecanico" layoutX="50.0" layoutY="120.0" prefWidth="400.0" promptText="ID Mecánico" />
+      <DatePicker fx:id="dpFechaReparacion" layoutX="50.0" layoutY="170.0" prefWidth="400.0" promptText="Fecha de Reparación" />
+      <TextArea fx:id="txtDescripcion" layoutX="50.0" layoutY="220.0" prefHeight="80.0" prefWidth="400.0" promptText="Descripción del problema o servicio" />
+      <TextField fx:id="txtCosto" layoutX="50.0" layoutY="320.0" prefWidth="400.0" promptText="Costo Estimado" />
+
+      <Button layoutX="130.0" layoutY="380.0" mnemonicParsing="false" onAction="#registrarTransaccion" text="Registrar Transacción" />
+      <Button layoutX="290.0" layoutY="380.0" mnemonicParsing="false" onAction="#limpiarCampos" text="Limpiar" />
+   </children>
+</AnchorPane>
