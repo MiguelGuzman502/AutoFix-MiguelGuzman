@@ -1,13 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.AutoFix.dao;
 
-/**
- *
- * @author OD 36544
- */
-public class ClienteDao {
-    
+import org.AutoFix.model.Cliente;
+import java.util.List;
+
+public interface ClienteDao {
+    List<Cliente> listarClientes();
+    void agregarCliente(Cliente cliente);
+    void actualizarCliente(Cliente cliente);
+    void eliminarCliente(int idCliente);
+    Cliente buscarClientePorId(int idCliente);
 }

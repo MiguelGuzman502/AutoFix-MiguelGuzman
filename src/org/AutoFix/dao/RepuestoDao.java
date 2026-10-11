@@ -1,13 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.AutoFix.dao;
 
-/**
- *
- * @author OD 36544
- */
-public class RepuestoDao {
-    
+import org.AutoFix.model.Repuesto;
+import java.util.List;
+
+public interface RepuestoDao {
+    List<Repuesto> listarRepuestos();
+    void agregarRepuesto(Repuesto repuesto);
+    void actualizarRepuesto(Repuesto repuesto);
+    void eliminarRepuesto(int idRepuesto);
+    Repuesto buscarRepuestoPorId(int idRepuesto);
 }

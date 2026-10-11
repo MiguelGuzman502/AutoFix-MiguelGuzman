@@ -1,13 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.AutoFix.dao;
 
-/**
- *
- * @author OD 36544
- */
-public class VehiculoDao {
-    
+import org.AutoFix.model.Vehiculo;
+import java.util.List;
+
+public interface VehiculoDao {
+    List<Vehiculo> listarVehiculos();
+    void agregarVehiculo(Vehiculo vehiculo);
+    void actualizarVehiculo(Vehiculo vehiculo);
+    void eliminarVehiculo(int idVehiculo);
+    Vehiculo buscarVehiculoPorId(int idVehiculo);
 }
