@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 public class SessionContext {
     private static SessionContext instancia;
+    private int idUsuario;
     private String usuario;
     private String rol;
     private LocalDateTime horaInicioSesion;
@@ -15,9 +16,7 @@ public class SessionContext {
     }
 
     public static synchronized SessionContext iniciarSesion(String usuario, String rol) {
-        if (instancia == null) {
-            instancia = new SessionContext(usuario, rol);
-        }
+        instancia = new SessionContext(usuario, rol);
         return instancia;
     }
 
@@ -28,6 +27,16 @@ public class SessionContext {
     public static synchronized void cerrarSesion() {
         instancia = null;
     }
+
+    public static synchronized SessionContext iniciarSesion(int idUsuario, String usuario, String rol) {
+        instancia = new SessionContext(usuario, rol);
+        instancia.idUsuario = idUsuario;
+        return instancia;
+    }
+
+    public int getIdUsuario() { return idUsuario; }
+
+    public boolean tieneRol(String rolRequerido) { return rol != null && rol.equalsIgnoreCase(rolRequerido); }
 
     public String getUsuario() {
         return usuario;
