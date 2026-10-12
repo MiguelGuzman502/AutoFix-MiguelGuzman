@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER"
+      spacing="18"
+      prefWidth="460"
+      prefHeight="380"
+      xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.AutoFix.controller.PrincipalController">
+
+    <children>
+
+        <Label text="AutoFix - Menú principal"
+               style="-fx-font-size: 23px; -fx-font-weight: bold;"/>
+
+        <Label fx:id="lblSesion"
+               text="Sesión activa"/>
+
+        <Button fx:id="btnMecanicos"
+                text="Mecánicos"
+                onAction="#abrirMecanicos"/>
+
+        <Button fx:id="btnReparaciones"
+                text="Registrar reparación"
+                onAction="#abrirReparaciones"/>
+
+        <Button fx:id="btnAprobarCalidad"
+                text="Aprobar calidad"
+                onAction="#abrirAprobacionCalidad"/>
+
+        <Button text="Cerrar sesión"
+                onAction="#cerrarSesion"/>
+
+    </children>
+
+</VBox>

@@ -38,7 +38,7 @@ public class VehiculoController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        vehiculoDao = new VehiculoDaoImpl();
+        vehiculoDao = (VehiculoDao) new VehiculoDaoImpl();
         
         colIdVehiculo.setCellValueFactory(new PropertyValueFactory<>("idVehiculo"));
         colIdCliente.setCellValueFactory(new PropertyValueFactory<>("idCliente"));

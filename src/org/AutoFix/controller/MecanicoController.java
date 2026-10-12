@@ -1,7 +1,8 @@
 package org.AutoFix.controller;
 
 import org.AutoFix.model.Mecanico;
-import org.AutoFix.util.Conexion;
+import org.AutoFix.dao.MecanicoDao;
+import org.AutoFix.dao.impl.MecanicoDaoImpl;
 import org.AutoFix.exceptions.DBException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,10 +14,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class MecanicoController implements Initializable {
@@ -33,6 +30,7 @@ public class MecanicoController implements Initializable {
     @FXML private TableColumn<Mecanico, String> colTelefono;
 
     private ObservableList<Mecanico> listaMecanicos;
+    private final MecanicoDao mecanicoDao = new MecanicoDaoImpl();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -45,25 +43,44 @@ public class MecanicoController implements Initializable {
     }
 
     public void cargarDatos() {
-        listaMecanicos = FXCollections.observableArrayList();
-        String sql = "SELECT idMecanico, nombres, apellidos, telefono FROM Mecanico";
-        
-        try (Connection conn = Conexion.getInstancia().getConexion();
-             PreparedStatement pstmt = conn.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
-            
-            while (rs.next()) {
-                listaMecanicos.add(new Mecanico(
-                    rs.getInt("idMecanico"),
-                    rs.getString("nombres"),
-                    rs.getString("apellidos"),
-                    rs.getString("telefono")
-                ));
-            }
+        try {
+            listaMecanicos = FXCollections.observableArrayList(mecanicoDao.listarMecanicos());
             tblMecanicos.setItems(listaMecanicos);
-        } catch (SQLException e) {
-            throw new DBException("Error al cargar los datos de mecánicos", e);
+        } catch (DBException e) {
+            mostrarAlerta("Error", "No se pudieron cargar los mecánicos", e.getMessage(), Alert.AlertType.ERROR);
         }
+    }
+
+    @FXML
+    public void guardarMecanico() {
+        if (txtNombres.getText().isBlank() || txtApellidos.getText().isBlank() || txtTelefono.getText().isBlank()) {
+            mostrarAlerta("Validación", "Datos incompletos", "Completa nombre, apellido y teléfono.", Alert.AlertType.WARNING);
+            return;
+        }
+        try {
+            mecanicoDao.agregarMecanico(new Mecanico(0, txtNombres.getText().trim(), txtApellidos.getText().trim(), txtTelefono.getText().trim()));
+            cargarDatos(); limpiarCampos();
+        } catch (DBException e) { mostrarAlerta("Error", "No se pudo guardar", e.getMessage(), Alert.AlertType.ERROR); }
+    }
+
+    @FXML
+    public void editarMecanico() {
+        Mecanico actual = tblMecanicos.getSelectionModel().getSelectedItem();
+        if (actual == null) { mostrarAlerta("Aviso", "Selecciona un mecánico", "Elige una fila para editar.", Alert.AlertType.WARNING); return; }
+        try {
+            mecanicoDao.actualizarMecanico(new Mecanico(actual.getIdMecanico(), txtNombres.getText().trim(), txtApellidos.getText().trim(), txtTelefono.getText().trim()));
+            cargarDatos(); limpiarCampos();
+        } catch (DBException e) { mostrarAlerta("Error", "No se pudo editar", e.getMessage(), Alert.AlertType.ERROR); }
+    }
+
+    @FXML
+    public void eliminarMecanico() {
+        Mecanico actual = tblMecanicos.getSelectionModel().getSelectedItem();
+        if (actual == null) { mostrarAlerta("Aviso", "Selecciona un mecánico", "Elige una fila para eliminar.", Alert.AlertType.WARNING); return; }
+        Alert confirmar = new Alert(Alert.AlertType.CONFIRMATION, "¿Eliminar el mecánico seleccionado?", javafx.scene.control.ButtonType.YES, javafx.scene.control.ButtonType.NO);
+        if (confirmar.showAndWait().orElse(javafx.scene.control.ButtonType.NO) != javafx.scene.control.ButtonType.YES) return;
+        try { mecanicoDao.eliminarMecanico(actual.getIdMecanico()); cargarDatos(); limpiarCampos(); }
+        catch (DBException e) { mostrarAlerta("Error", "No se pudo eliminar", e.getMessage(), Alert.AlertType.ERROR); }
     }
 
     @FXML

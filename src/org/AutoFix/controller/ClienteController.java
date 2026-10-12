@@ -35,7 +35,7 @@ public class ClienteController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        clienteDao = new ClienteDaoImpl();
+        clienteDao = (ClienteDao) new ClienteDaoImpl();
         
         colId.setCellValueFactory(new PropertyValueFactory<>("idCliente"));
         colNit.setCellValueFactory(new PropertyValueFactory<>("nit"));

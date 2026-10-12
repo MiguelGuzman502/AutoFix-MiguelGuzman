@@ -1,3 +1,4 @@
+
 package org.AutoFix.util;
 
 import java.sql.Connection;
@@ -7,21 +8,36 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Conexion {
+
     private static Conexion instancia;
     private Connection conexion;
-    private static final Logger LOGGER = Logger.getLogger(Conexion.class.getName());
+
+    private static final Logger LOGGER =
+            Logger.getLogger(Conexion.class.getName());
 
     private final String URL = "jdbc:mysql://localhost:3306/db_autofix?useSSL=false&serverTimezone=UTC";
     private final String USER = "root";
-    private final String PASSWORD = "MiguelAngel2009"; 
+    private final String PASSWORD = "MiguelAngel2009";
 
     private Conexion() {
+        conectar();
+    }
+
+    private void conectar() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            this.conexion = DriverManager.getConnection(URL, USER, PASSWORD);
-            LOGGER.log(Level.INFO, "Conexión a la base de datos establecida exitosamente.");
+
+            this.conexion = DriverManager.getConnection(
+                    URL, USER, PASSWORD
+            );
+
+            LOGGER.log(Level.INFO,
+                    "Conexion a la base de datos establecida correctamente.");
+
         } catch (ClassNotFoundException | SQLException e) {
-            LOGGER.log(Level.SEVERE, "Error al conectar con la base de datos", e);
+            LOGGER.log(Level.SEVERE,
+                    "Error al conectar con la base de datos", e);
+            this.conexion = null;
         }
     }
 
@@ -30,13 +46,17 @@ public class Conexion {
             instancia = new Conexion();
         } else {
             try {
-                if (instancia.conexion.isClosed()) {
-                    instancia = new Conexion();
+                if (instancia.conexion == null ||
+                        instancia.conexion.isClosed()) {
+                    instancia.conectar();
                 }
             } catch (SQLException e) {
-                LOGGER.log(Level.SEVERE, "Error al verificar el estado de la conexión", e);
+                LOGGER.log(Level.SEVERE,
+                        "Error al verificar la conexion", e);
+                instancia.conectar();
             }
         }
+
         return instancia;
     }
 
@@ -44,19 +64,23 @@ public class Conexion {
         return this.conexion;
     }
 
+    public Connection getConexion() {
+        return this.conexion;
+    }
+
     public void cerrarConexion() {
         try {
             if (conexion != null && !conexion.isClosed()) {
                 conexion.close();
-                instancia = null;
-                LOGGER.log(Level.INFO, "Conexión cerrada correctamente.");
+                LOGGER.log(Level.INFO,
+                        "Conexion cerrada correctamente.");
             }
-        } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE, "Error al cerrar la conexión", e);
-        }
-    }
 
-    public Connection getConexion() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            conexion = null;
+
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE,
+                    "Error al cerrar la conexion", e);
+        }
     }
 }

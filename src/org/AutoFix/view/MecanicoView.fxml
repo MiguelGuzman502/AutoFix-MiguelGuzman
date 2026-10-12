@@ -11,6 +11,9 @@
       <TextField fx:id="txtApellidos" layoutX="370.0" layoutY="30.0" promptText="Apellidos"/>
       <TextField fx:id="txtTelefono" layoutX="30.0" layoutY="80.0" promptText="Teléfono"/>
       <Button fx:id="btnLimpiar" layoutX="200.0" layoutY="80.0" mnemonicParsing="false" onAction="#limpiarCampos" text="Limpiar Campos"/>
+      <Button layoutX="320.0" layoutY="80.0" onAction="#guardarMecanico" text="Guardar"/>
+      <Button layoutX="410.0" layoutY="80.0" onAction="#editarMecanico" text="Editar"/>
+      <Button layoutX="490.0" layoutY="80.0" onAction="#eliminarMecanico" text="Eliminar"/>
       <TableView fx:id="tblMecanicos" layoutX="30.0" layoutY="130.0" onMouseClicked="#seleccionarElemento" prefHeight="330.0" prefWidth="640.0">
         <columns>
           <TableColumn fx:id="colIdMecanico" prefWidth="80.0" text="ID" />

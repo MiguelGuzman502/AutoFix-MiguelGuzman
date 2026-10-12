@@ -1,13 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.AutoFix.dao;
 
-/**
- *
- * @author OD 36544
- */
-public class DetalleRepuestoDao {
-    
+import org.AutoFix.model.DetalleRepuesto;
+import org.AutoFix.exceptions.DBException;
+import java.util.List;
+
+public interface DetalleRepuestoDao {
+    void agregarDetalleRepuesto(DetalleRepuesto detalle) throws DBException;
+    List<DetalleRepuesto> listarDetallesRepuestos() throws DBException;
 }

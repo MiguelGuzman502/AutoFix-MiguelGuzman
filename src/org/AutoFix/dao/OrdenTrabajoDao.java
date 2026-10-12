@@ -1,13 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.AutoFix.dao;
 
-/**
- *
- * @author OD 36544
- */
-public class OrdenTrabajoDao {
-    
+import org.AutoFix.model.OrdenTrabajo;
+import org.AutoFix.exceptions.DBException;
+import java.util.List;
+
+public interface OrdenTrabajoDao {
+
+    void agregarOrdenTrabajo(OrdenTrabajo orden) throws DBException;
+
+    List<OrdenTrabajo> listarOrdenesTrabajo() throws DBException;
+
+    void aprobarCalidad(int idOrdenTrabajo, int idJefe) throws DBException;
 }
