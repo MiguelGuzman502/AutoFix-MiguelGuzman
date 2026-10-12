@@ -43,8 +43,8 @@ public class PrincipalController {
         );
 
         btnReparaciones.setDisable(
-                !(sesion.tieneRol("Jefe de Taller")
-                || sesion.tieneRol("Mecánico"))
+        !(sesion.tieneRol("Jefe de Taller")
+        || sesion.tieneRol("Mecanico"))
         );
 
         btnAprobarCalidad.setDisable(
