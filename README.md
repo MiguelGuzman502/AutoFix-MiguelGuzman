@@ -83,6 +83,27 @@ Los archivos se encuentran en la carpeta `database`:
 El proyecto utiliza GitFlow para organizar el desarrollo mediante las ramas `master`, `develop` y `feature`.
 
 Repositorio: https://github.com/MiguelGuzman502/AutoFix-MiguelGuzman
+Videos de presentación del proyecto AutoFix
+
+A continuación se presentan tres videos donde se explica el desarrollo, la base de datos y el funcionamiento del sistema AutoFix.
+
+Video 1 — Código Java, arquitectura y GitHub
+
+En este video se explican las tecnologías utilizadas, la estructura del proyecto, las clases Java, la arquitectura MVC, el patrón DAO, Singleton y el repositorio de GitHub.
+
+🔗 https://youtu.be/7fVb8t5uvb4
+
+Video 2 — Base de datos MySQL
+
+En este video se muestra la base de datos db_autofix, sus tablas, registros, procedimientos almacenados y el diagrama entidad-relación.
+
+🔗 https://youtu.be/-s9BCw1Z368
+
+Video 3 — Funcionamiento de AutoFix
+
+En este video se demuestra el funcionamiento del sistema, incluyendo el inicio de sesión, la administración de mecánicos, el registro de reparaciones, la aprobación de calidad y el control de acceso por roles.
+
+🔗 https://youtu.be/_EQ6Iu5w_0g
 
  Autor
 Miguel Guzman  
